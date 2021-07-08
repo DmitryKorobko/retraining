@@ -11,6 +11,32 @@
   </head>
 
   <body>
+  <% unless flash.empty? %>
+    <script type="text/javascript">
+        <% flash.each do |f| %>
+        <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+        toastr['<%= type %>']('<%= f[1] %>');
+        <% end %>
+    </script>
+  <% end %>
+
     <%= yield %>
+  <section class="py-5 text-center container">
+  <% if can? :manage, User %>
+    <p>Visible only for admins! </p>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= link_to('Go Home', root_path) %>
+    <%= link_to('Edit Registration', edit_user_registration_path) %>
+    <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %>
+      <% if current_user.admin_role? %>
+        <%= link_to('Admin Path', "/admin") %>
+      <% end %>
+  <% else %>
+    <%= link_to('Sign Up', new_user_registration_path)  %>
+    <%= link_to('Sign In', new_user_session_path)  %>
+  <% end %>
+  </section>
   </body>
 </html>
