@@ -1,0 +1,52 @@
+<%= form_with(model: book) do |form| %>
+  <% if book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+
+      <ul>
+        <% book.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <%= form.label :title, class: "input-group-text"%>
+    </div>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <%= form.label :author, class: "input-group-text"%>
+    </div>
+    <%= form.select :author_id, @authors %>
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <%= form.label :genre, class: "input-group-text"%>
+    </div>
+    <%= form.select :genre_id, @genres %>
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <%= form.label :year, class: "input-group-text"%>
+    </div>
+    <%= form.text_field :year %>
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <%= form.label :quantity, class: "input-group-text"%>
+    </div>
+    <%= form.text_field :quantity %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-primary" %>
+  </div>
+<% end %>

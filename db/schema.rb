@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 2021_07_08_145225) do
     t.bigint "user_id"
     t.bigint "book_id"
     t.datetime "period"
-    t.boolean "activity", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_loans_on_book_id"
@@ -64,13 +63,11 @@ ActiveRecord::Schema.define(version: 2021_07_08_145225) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "role", default: 0
+    t.string "type"
     t.string "first_name"
     t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "books", "authors"
-  add_foreign_key "loans", "books"
-  add_foreign_key "loans", "users"
 end

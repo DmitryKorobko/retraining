@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @book.title %></h1>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Title</span>
+  </div>
+  <span class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    <%= @book.title %>
+  </span>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Author</span>
+  </div>
+  <span class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    <%= @book.author.full_name %>
+  </span>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Genre</span>
+  </div>
+  <span class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    <%= @book.genre.name %>
+  </span>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Year</span>
+  </div>
+  <span class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    <%= @book.year %>
+  </span>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Quantity</span>
+  </div>
+  <span class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    <%= @book.quantity %>
+  </span>
+</div>
+
+<%= link_to 'Edit', edit_book_path(@book), class:"btn btn-primary" %>
+<%= link_to 'Back', books_path, class:"btn btn-primary" %>

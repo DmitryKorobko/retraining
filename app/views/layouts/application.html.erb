@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Retraining</title>
+    <title>Library</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -22,20 +22,17 @@
 
     <%= yield %>
   <section class="py-5 text-center container">
-  <% if can? :manage, User %>
-    <p>Visible only for Librarian! </p>
-  <% end %>
 
   <% if user_signed_in? %>
-    <%= link_to('Go Home', root_path) %>
-    <%= link_to('Edit Registration', edit_user_registration_path) %>
-    <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %>
+    <%= link_to('Home', root_path, class:"btn btn-primary") %>
+    <%= link_to('Edit Profile', edit_user_registration_path, class:"btn btn-primary") %>
+    <%= link_to('Log Out', destroy_user_session_path, :method => :delete, class:"btn btn-primary") %>
       <% if current_user.librarian? %>
-        <%= link_to('Admin Path', "/admin") %>
+        <%= link_to('Admin Path', "/admin", class:"btn btn-primary") %>
       <% end %>
   <% else %>
-    <%= link_to('Sign Up', new_user_registration_path)  %>
-    <%= link_to('Sign In', new_user_session_path)  %>
+    <%= link_to('Sign Up', new_user_registration_path, class:"btn btn-primary") %>
+    <%= link_to('Sign In', new_user_session_path, class:"btn btn-primary")  %>
   <% end %>
   </section>
   </body>

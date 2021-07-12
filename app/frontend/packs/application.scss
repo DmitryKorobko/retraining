@@ -7,3 +7,12 @@ h1 {
 @import "~bootstrap/scss/bootstrap";
 // Import toastr
 @import '~toastr/toastr';
+
+th.actions {
+  text-align: center;
+}
+
+.btn-primary {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
