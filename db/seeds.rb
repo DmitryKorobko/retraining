@@ -13,8 +13,8 @@ if Author.present?
 end
 
 if Genre.present?
-  Genre.create!(name: 'Fantasy')
-  Genre.create!(name: 'Novel')
+  Genre.create!(name: 'Fantasy', description: 'Fantasy genre')
+  Genre.create!(name: 'Novel', description: 'Classic novel genre')
 end
 
 if Book.present?

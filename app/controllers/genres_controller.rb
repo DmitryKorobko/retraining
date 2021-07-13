@@ -1,5 +1,7 @@
 class GenresController < ApplicationController
   before_action :set_genre, only: %i[ show edit update destroy ]
+  skip_before_action :authenticate_user!, only:%i[:index, :show]
+  skip_before_action :librarian_check, only: %i[:index, :show]
 
   # GET /genres or /genres.json
   def index
@@ -64,6 +66,6 @@ class GenresController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def genre_params
-      params.fetch(:genre, {})
+      params.require(:genre).permit(:name, :description)
     end
 end
