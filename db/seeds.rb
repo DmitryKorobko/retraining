@@ -8,8 +8,8 @@
 # Create seeds
 
 if Author.present?
-  Author.create!(first_name: 'Robert', last_name: 'Salvatore')
-  Author.create!(first_name: 'Fedor', last_name: 'Dostoevsky')
+  Author.create!(first_name: 'Robert', last_name: 'Salvatore', date_of_birth: '01/20/1959')
+  Author.create!(first_name: 'Fedor', last_name: 'Dostoevsky', date_of_birth: '10/21/1821', date_of_death: '01/28/1881')
 end
 
 if Genre.present?

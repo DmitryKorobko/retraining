@@ -1,0 +1,12 @@
+p#notice
+  = notice
+h1
+  = @author.full_name
+
+= render 'show_field', label_text: 'First Name', text_block: (@author.first_name)
+= render 'show_field', label_text: 'Last Name', text_block: (@author.last_name)
+= render 'show_field', label_text: 'Date Of Birth', text_block: (@author.date_of_birth.strftime("%m/%d/%Y") unless @author.date_of_birth.nil?)
+= render 'show_field', label_text: 'Date Of Death', text_block: (@author.date_of_death.strftime("%m/%d/%Y") unless @author.date_of_death.nil?)
+
+= link_to 'Edit', edit_author_path(@author), class:"btn btn-primary"
+= link_to 'Back', authors_path, class:"btn btn-primary"

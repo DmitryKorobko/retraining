@@ -9,5 +9,12 @@ h1
 = render 'show_field', label_text: 'Year', text_block: (@book.year)
 = render 'show_field', label_text: 'Quantity', text_block: (@book.quantity)
 
+/ .input-group.mb-3
+/   .input-group-prepend
+/     span.input-group-text
+/       | Genre
+/   span.form-control[aria-label="Default" aria-describedby="inputGroup-sizing-default"]
+/     = @book.genre.name
+
 = link_to 'Edit', edit_book_path(@book), class:"btn btn-primary"
 = link_to 'Back', books_path, class:"btn btn-primary"

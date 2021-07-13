@@ -1,0 +1,37 @@
+p#notice
+  = notice
+h1
+  | Authors
+table.table
+  thead
+    tr
+      th[scope="col"]
+        | #
+      th[scope="col"]
+        | Full Name
+      th[scope="col"]
+        | Date Of Birth
+      th[scope="col"]
+        | Date Of Death
+      th.actions[scope="col" colspan="3"]
+        | Actions
+  tbody
+    - @authors.each_with_index do |author, index|
+      tr
+        td
+          = index + 1
+        td
+          = link_to author.full_name, author
+        td
+          = author.date_of_birth.strftime("%m/%d/%Y") unless author.date_of_birth.nil?
+        td
+          = author.date_of_death.strftime("%m/%d/%Y") unless author.date_of_death.nil?
+        td
+          = link_to fa_icon('eye'), author
+        td
+          = link_to fa_icon('edit'), edit_author_path(author)
+        td
+          = link_to fa_icon('trash'), author, method: :delete, data: { confirm: 'Are you sure?' }
+
+br
+= link_to 'Create New Author', new_author_path, class:"btn btn-primary" if user_signed_in?
