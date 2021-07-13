@@ -1,0 +1,13 @@
+p#notice
+  = notice
+h1
+  = @user.full_name
+
+= render 'show_field', label_text: 'First Name', text_block: (@user.first_name)
+= render 'show_field', label_text: 'Last Name', text_block: (@user.last_name)
+= render 'show_field', label_text: 'Email', text_block: (@user.email)
+= render 'show_field', label_text: 'Encrypted Password', text_block: (@user.encrypted_password)
+= render 'show_field', label_text: 'Type', text_block: (@user.type)
+
+= link_to 'Edit', edit_user_path(@user), class:"btn btn-primary"
+= link_to 'Back', users_path, class:"btn btn-primary"

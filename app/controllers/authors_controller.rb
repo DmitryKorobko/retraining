@@ -1,7 +1,8 @@
 class AuthorsController < ApplicationController
   before_action :set_author, only: %i[ show edit update destroy ]
-  skip_before_action :authenticate_user!, only:%i[:index, :show]
-  skip_before_action :librarian_check, only: %i[:index, :show]
+  before_action :authenticate_user!, :librarian_check
+  skip_before_action :authenticate_user!, only: %i[index show]
+  skip_before_action :librarian_check, only: %i[index show]
 
   # GET /authors or /authors.json
   def index

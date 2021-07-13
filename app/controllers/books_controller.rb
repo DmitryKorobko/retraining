@@ -1,8 +1,9 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show edit update destroy ]
+  before_action :set_book, only: %i[show edit update destroy]
   before_action :set_authors_and_genres, only: %i[new create edit]
-  skip_before_action :authenticate_user!, only:%i[:index, :show]
-  skip_before_action :librarian_check, only: %i[:index, :show]
+  before_action :authenticate_user!, :librarian_check
+  skip_before_action :authenticate_user!, only: %i[index show]
+  skip_before_action :librarian_check, only: %i[index show]
 
   # GET /books or /books.json
   def index

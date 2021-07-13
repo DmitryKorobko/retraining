@@ -1,0 +1,7 @@
+h1
+  | Editing User
+
+= render 'form', user: @user, url: {controller: "users", action: "update"}
+
+= link_to 'Show', "/users/#{@user.id}", class:"btn btn-primary"
+= link_to 'Back', users_path, class:"btn btn-primary"
