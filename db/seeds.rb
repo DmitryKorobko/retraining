@@ -18,10 +18,10 @@ if Genre.present?
 end
 
 if Book.present?
-  Book.create!(title: 'The Demon Wakes Up', author_id: Author.first.id, year: 2002, quantity: 10)
-  Book.create!(title: 'Spirit Of The Demon', author_id: Author.first.id, year: 2004, quantity: 10)
-  Book.create!(title: 'Crime and Punishment', author_id: Author.last.id, year: 1866, quantity: 15)
-  Book.create!(title: 'The Player', author_id: Author.last.id, year: 1866, quantity: 15)
+  Book.create!(title: 'The Demon Wakes Up', author_id: Author.first.id, year: 2002, quantity: 10, genre_ids: [Genre.first.id])
+  Book.create!(title: 'Spirit Of The Demon', author_id: Author.first.id, year: 2004, quantity: 10, genre_ids: [Genre.first.id])
+  Book.create!(title: 'Crime and Punishment', author_id: Author.last.id, year: 1866, quantity: 15, genre_ids: [Genre.last.id])
+  Book.create!(title: 'The Player', author_id: Author.last.id, year: 1866, quantity: 15, genre_ids: [Genre.last.id])
 end
 
 if User.present?

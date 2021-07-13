@@ -12,6 +12,8 @@ table.table
       th[scope="col"]
         | Author
       th[scope="col"]
+        | Genre
+      th[scope="col"]
         | Year
       th[scope="col"]
         | Quantity
@@ -26,6 +28,8 @@ table.table
           = link_to book.title, book
         td
           = link_to book.author.full_name, book.author
+        td
+          = book.genres.map {|bg| bg.name}.join(', ')
         td
           = book.year
         td
