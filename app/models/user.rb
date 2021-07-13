@@ -1,8 +1,13 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-  enum role: [:customer, :librarian]
-
   has_many :loans
+
+  def librarian?
+    type == 'Librarian'
+  end
+
+  def customer?
+    type == 'Customer'
+  end
 end

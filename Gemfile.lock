@@ -220,6 +220,9 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    slim (4.1.0)
+      temple (>= 0.7.6, < 0.9)
+      tilt (>= 2.0.6, < 2.1)
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -279,6 +282,7 @@ DEPENDENCIES
   rails_admin (~> 2.0)
   sass-rails (>= 6)
   selenium-webdriver
+  slim
   spring
   turbolinks (~> 5)
   tzinfo-data

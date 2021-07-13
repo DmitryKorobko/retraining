@@ -1,10 +1,9 @@
 class BooksController < ApplicationController
-  protect_from_forgery with: :exception
-  before_action :authenticate_user!
   before_action :librarian_check
-  skip_before_action :authenticate_user!, :only => [:index, :show]
-  skip_before_action :librarian_check, :only => [:index, :show]
   before_action :set_book, only: %i[ show edit update destroy ]
+  before_action :set_authors_and_genres, only: %i[new create edit]
+  skip_before_action :authenticate_user!, only:%i[:index, :show]
+  skip_before_action :librarian_check, only: %i[:index, :show]
 
   # GET /books or /books.json
   def index
@@ -27,7 +26,6 @@ class BooksController < ApplicationController
   # POST /books or /books.json
   def create
     @book = Book.new(book_params)
-
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: "Book was successfully created." }
@@ -65,24 +63,16 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
-      @authors = {}
-      @genres = {}
-
-      authors = Author.all
-      genres = Genre.all
-
-      authors.each do |author|
-        @authors[author.full_name] = author.id.to_i
-      end
-
-      genres.each do |genre|
-        @genres[genre.name] = genre.id
-      end
     end
+
+  def set_authors_and_genres
+    @authors = Author.all
+    @genres = Genre.all
+  end
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :author_id, :genre_id, :year, :quantity)
+      params.require(:book).permit(:title, :author_id, :year, :quantity, genre_ids: [])
     end
 
     def librarian_check

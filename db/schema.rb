@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_08_145225) do
+ActiveRecord::Schema.define(version: 2021_07_13_065604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,14 +27,21 @@ ActiveRecord::Schema.define(version: 2021_07_08_145225) do
   create_table "books", force: :cascade do |t|
     t.string "title", null: false
     t.bigint "author_id"
-    t.bigint "genre_id"
     t.integer "year"
     t.integer "loan_period"
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_books_on_author_id"
-    t.index ["genre_id"], name: "index_books_on_genre_id"
+  end
+
+  create_table "books_genres", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "genre_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_books_genres_on_book_id"
+    t.index ["genre_id"], name: "index_books_genres_on_genre_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -62,7 +69,6 @@ ActiveRecord::Schema.define(version: 2021_07_08_145225) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "role", default: 0
     t.string "type"
     t.string "first_name"
     t.string "last_name"

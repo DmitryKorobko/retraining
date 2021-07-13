@@ -60,3 +60,4 @@ gem 'pry'
 gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
 gem "font-awesome-rails"
+gem 'slim'

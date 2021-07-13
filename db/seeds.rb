@@ -6,13 +6,25 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # Create seeds
-author1 = Author.create!(first_name: 'Robert', last_name: 'Salvatore')
-author2 = Author.create!(first_name: 'Fedor', last_name: 'Dostoevsky')
-genre1 = Genre.create!(name: 'Fantasy')
-genre2 = Genre.create!(name: 'Novel')
-Book.create!(title: 'The Demon Wakes Up', author_id: author1.id, genre_id: genre1.id, year: 2002, quantity: 10)
-Book.create!(title: 'Spirit Of The Demon', author_id: author1.id, genre_id: genre1.id, year: 2004, quantity: 10)
-Book.create!(title: 'Crime and Punishment', author_id: author2.id, genre_id: genre2.id, year: 1866, quantity: 15)
-Book.create!(title: 'The Player', author_id: author2.id, genre_id: genre2.id, year: 1866, quantity: 15)
-Librarian.create!(email: 'lib@lib.com', password: 'password', first_name: 'Obi', last_name: 'Wan Kenobi', role: User::roles['librarian'])
-Customer.create!(email: 'cust@cust.com', password: 'password', first_name: 'Luke', last_name: 'Skywalker', role: User::roles['customer'])
+
+if Author.present?
+  Author.create!(first_name: 'Robert', last_name: 'Salvatore')
+  Author.create!(first_name: 'Fedor', last_name: 'Dostoevsky')
+end
+
+if Genre.present?
+  Genre.create!(name: 'Fantasy')
+  Genre.create!(name: 'Novel')
+end
+
+if Book.present?
+  Book.create!(title: 'The Demon Wakes Up', author_id: Author.first.id, year: 2002, quantity: 10)
+  Book.create!(title: 'Spirit Of The Demon', author_id: Author.first.id, year: 2004, quantity: 10)
+  Book.create!(title: 'Crime and Punishment', author_id: Author.last.id, year: 1866, quantity: 15)
+  Book.create!(title: 'The Player', author_id: Author.last.id, year: 1866, quantity: 15)
+end
+
+if User.present?
+  Librarian.create!(email: 'lib@lib.com', password: 'password', first_name: 'Obi', last_name: 'Wan Kenobi')
+  Customer.create!(email: 'cust@cust.com', password: 'password', first_name: 'Luke', last_name: 'Skywalker')
+end
