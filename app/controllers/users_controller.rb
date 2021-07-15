@@ -10,7 +10,16 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1 or /users/1.json
-  def show; end
+  def show
+    books = []
+    loans = Loan.includes(:book).where(user_id: @user.id)
+
+    loans.each do |l|
+      books << (helpers.link_to l.book.title, book_path(l.book)).html_safe
+    end
+
+    @books = books.join(', ')
+  end
 
   # GET /users/new
   def new

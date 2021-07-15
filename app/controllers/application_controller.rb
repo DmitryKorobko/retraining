@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   private
 
   def librarian_check
-    redirect_to root_path, alert: 'Permission Denied!' unless current_user.librarian?
+    redirect_to request.referrer, alert: 'Permission Denied!' unless current_user.librarian?
   end
 end

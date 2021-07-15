@@ -1,9 +1,12 @@
-= form_with(model: loan) do |form|
+= form_with model: loan do |form|
 
   = render 'errors', loan: @loan
 
   = form_field form, :book, (form.select :book_id, @books.map {|b| [b.title, b.id]})
-  = form_field form, :customer, (form.select :user_id, @customers.map {|c| [c.full_name, c.id]})
+  - if current_user.librarian?
+    = form_field form, :customer, (form.select :user_id, @customers.map {|c| [c.full_name, c.id]})
+  - else
+    = hidden_field 'loan', :user_id, {value: current_user.id}
   = form_field form, :period, (form.date_field :period)
 
   .actions

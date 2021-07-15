@@ -9,10 +9,15 @@ table.table
         | #
       th[scope="col"]
         | Book
+      - if current_user.librarian?
+        th[scope="col"]
+          | Customer
       th[scope="col"]
-        | Customer
+        | Borrowing
       th[scope="col"]
-        | Period
+        | Returning
+      th[scope="col"]
+        | Active / Expired
       th.actions[scope="col" colspan="3"]
         | Actions
   tbody
@@ -22,10 +27,19 @@ table.table
           = index + 1
         td
           = link_to loan.book.title, book_path(loan.book)
+        - if current_user.librarian?
+          td
+            = link_to loan.user.full_name, user_path(loan.user)
         td
-          = link_to loan.user.full_name, user_path(loan.user)
+          = loan.decorate.formatted_date
         td
-          = loan.decorate.formatted_period
+          = loan.decorate.formatted_date('returning')
+        - if loan.expired?
+          td.expired
+            = "Expired (#{loan.expired_days} days)"
+        - else
+          td.not-expired
+            = 'Active'
         td
           = link_to fa_icon('eye'), loan
         td

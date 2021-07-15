@@ -9,11 +9,41 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    @books = Book.includes(:author, :genres)
+    if user_signed_in? && current_user.librarian?
+      books = Book.includes(:author, :genres)
+    else
+      books = Book.joins(:author, :genres)
+    end
+
+    if params[:filter_author].present?
+      author = params[:filter_author].downcase
+      books = books.where("lower(authors.first_name) LIKE '%#{author}%' OR lower(authors.last_name) LIKE '%#{author}%'")
+    end
+
+    if params[:filter_title].present?
+      title = params[:filter_title].downcase
+      books = books.where("lower(title) LIKE '%#{title}%'")
+    end
+
+    @books = books
+
+    # respond_to do |format|
+    #   format.html { redirect_to books_path, notice: 'Filters applied.' }
+    #   format.json { render :index, status: :accepted, location: books_path }
+    # end
   end
 
   # GET /books/1 or /books/1.json
-  def show; end
+  def show
+    customers = []
+    loans = Loan.includes(:user).where(book_id: @book.id)
+
+    loans.each do |l|
+      customers << (helpers.link_to l.user.full_name, user_path(l.user)).html_safe
+    end
+
+    @customers = customers.join(', ')
+  end
 
   # GET /books/new
   def new

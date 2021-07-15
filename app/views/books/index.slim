@@ -2,6 +2,26 @@ p#notice
   = notice
 h1
   | Books
+
+h2
+  | Filters
+label[for="filter_author"]
+.input-group.mb-3
+  .input-group-prepend
+    span.input-group-text
+      | Author
+  input#filter_author.form-control[type="text" aria-describedby="basic-addon3"]
+label[for="filter_author"]
+.input-group.mb-3
+  .input-group-prepend
+    span.input-group-text
+      | Title
+  input#filter_title.form-control[type="text" aria-describedby="basic-addon3"]
+
+br
+button#books_filters_button.btn.btn-primary[type="button"]
+  | Apply Filters
+
 table.table
   thead
     tr
@@ -15,8 +35,11 @@ table.table
         | Genre
       th[scope="col"]
         | Year
+      - if user_signed_in? && current_user.librarian?
+        th[scope="col"]
+          | Quantity
       th[scope="col"]
-        | Quantity
+        | Available
       th.actions[scope="col" colspan="3"]
         | Actions
   tbody
@@ -32,8 +55,15 @@ table.table
           = book.genres.map {|bg| bg.name}.join(', ')
         td
           = book.year
-        td
-          = book.quantity
+        - if user_signed_in? && current_user.librarian?
+          td
+            = book.quantity
+        - if book.available?
+          td.not-expired
+            = 'Available'
+        - else
+          td.expired
+            = 'Unavailable'
         td
           = link_to fa_icon('eye'), book
         td

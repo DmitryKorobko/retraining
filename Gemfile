@@ -66,3 +66,4 @@ gem 'pry'
 gem 'rails_admin', '~> 2.0'
 gem 'rubocop', require: false
 gem 'slim'
+gem 'jquery-rails'

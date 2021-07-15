@@ -5,5 +5,9 @@ class Book < ApplicationRecord
   has_and_belongs_to_many :genres
   has_many :loans, dependent: :destroy
 
-  accepts_nested_attributes_for :genres
+  # scope :for_customer, -> { where('quantity > 0' ) }
+
+  def available?
+    quantity > 0
+  end
 end

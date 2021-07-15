@@ -5,7 +5,9 @@ h1
 
 = show_field 'Book', @loan.book.title
 = show_field 'Customer', @loan.user.full_name
-= show_field 'Period', @loan.decorate.formatted_period
+= show_field 'Borrowing', @loan.decorate.formatted_date
+= show_field 'Beginning', @loan.decorate.formatted_date('beginning')
+= show_field 'Active / Expired', @loan.expired? ? "Expired (#{@loan.expired_days} days)" : 'Active'
 
 = link_to 'Edit', edit_loan_path(@loan), class:"btn btn-primary"
 = link_to 'Back', loans_path, class:"btn btn-primary"

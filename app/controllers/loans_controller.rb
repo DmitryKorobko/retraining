@@ -4,10 +4,15 @@ class LoansController < ApplicationController
   before_action :set_loan, only: %i[show edit update destroy]
   before_action :set_books_and_customers, only: %i[new create edit]
   before_action :authenticate_user!, :librarian_check
+  skip_before_action :librarian_check, only: %i[index new create show]
 
   # GET /loans or /loans.json
   def index
-    @loans = Loan.includes(:book, :user)
+    if current_user.librarian?
+      @loans = Loan.includes(:book, :user)
+    else
+      @loans = Loan.includes(:book, :user).where(user_id: current_user.id)
+    end
   end
 
   # GET /loans/1 or /loans/1.json
@@ -27,6 +32,9 @@ class LoansController < ApplicationController
 
     respond_to do |format|
       if @loan.save
+        book = @loan.book
+        book.decrement(:quantity)
+        book.save
         format.html { redirect_to @loan, notice: 'Loan was successfully created.' }
         format.json { render :show, status: :created, location: @loan }
       else
@@ -51,7 +59,10 @@ class LoansController < ApplicationController
 
   # DELETE /loans/1 or /loans/1.json
   def destroy
+    book = @loan.book
     @loan.destroy
+    book.increment(:quantity)
+    book.save
     respond_to do |format|
       format.html { redirect_to loans_url, notice: 'Loan was successfully destroyed.' }
       format.json { head :no_content }

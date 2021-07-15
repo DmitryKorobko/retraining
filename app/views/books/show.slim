@@ -8,6 +8,8 @@ h1
 = show_field 'Genre', @book.genres.map {|bg| bg.name}.join(', ')
 = show_field 'Year', @book.year
 = show_field 'Quantity', @book.quantity
+- if user_signed_in? && current_user.librarian?
+  = show_field 'Customers', sanitize(@customers)
 
 = link_to 'Edit', edit_book_path(@book), class:"btn btn-primary"
 = link_to 'Back', books_path, class:"btn btn-primary"
