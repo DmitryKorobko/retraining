@@ -1,0 +1,10 @@
+p#notice
+  = notice
+h1
+  = @genre.name
+
+= show_field 'Name', @genre.name
+= show_field 'Description', @genre.description
+
+= link_to 'Edit', edit_genre_path(@genre), class:"btn btn-primary"
+= link_to 'Back', genres_path, class:"btn btn-primary"

@@ -1,0 +1,9 @@
+= form_with(model: genre) do |form|
+
+  = render 'errors', genre: @genre
+
+  = form_field form, :name, (form.text_field :name)
+  = form_field form, :description, (form.text_field :description)
+
+  .actions
+    = form.submit class:"btn btn-primary"

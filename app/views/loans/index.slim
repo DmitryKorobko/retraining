@@ -1,0 +1,37 @@
+p#notice
+  = notice
+h1
+  | Loans
+table.table
+  thead
+    tr
+      th[scope="col"]
+        | #
+      th[scope="col"]
+        | Book
+      th[scope="col"]
+        | Customer
+      th[scope="col"]
+        | Period
+      th.actions[scope="col" colspan="3"]
+        | Actions
+  tbody
+    - @loans.each_with_index do |loan, index|
+      tr
+        td
+          = index + 1
+        td
+          = link_to loan.book.title, book_path(loan.book)
+        td
+          = link_to loan.user.full_name, user_path(loan.user)
+        td
+          = loan.decorate.formatted_period
+        td
+          = link_to fa_icon('eye'), loan
+        td
+          = link_to fa_icon('edit'), edit_loan_path(loan)
+        td
+          = link_to fa_icon('trash'), loan, method: :delete, data: { confirm: 'Are you sure?' }
+
+br
+= link_to 'Create New Loan', new_loan_path, class:"btn btn-primary" if user_signed_in?

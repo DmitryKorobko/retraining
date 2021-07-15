@@ -1,0 +1,37 @@
+p#notice
+  = notice
+h1
+  | Users
+table.table
+  thead
+    tr
+      th[scope="col"]
+        | #
+      th[scope="col"]
+        | Full Name
+      th[scope="col"]
+        | Email
+      th[scope="col"]
+        | Encrypted Password
+      th.actions[scope="col" colspan="3"]
+        | Actions
+  tbody
+    - @users.each_with_index do |user, index|
+      tr
+        td
+          = index + 1
+        td
+          = link_to user.full_name, "/users/#{user.id}"
+        td
+          = user.email
+        td
+          = user.encrypted_password
+        td
+          = link_to fa_icon('eye'), "/users/#{user.id}"
+        td
+          = link_to fa_icon('edit'), edit_user_path(user)
+        td
+          = link_to fa_icon('trash'), "/users/#{user.id}", method: :delete, data: { confirm: 'Are you sure?' }
+
+br
+= link_to 'Create New User', new_user_path, class:"btn btn-primary" if user_signed_in?

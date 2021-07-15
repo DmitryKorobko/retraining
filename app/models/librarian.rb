@@ -1,3 +1,4 @@
-class Librarian < User
+# frozen_string_literal: true
 
+class Librarian < User
 end

@@ -1,0 +1,12 @@
+p#notice
+  = notice
+h1
+  = @author.full_name
+
+= show_field 'First Name', @author.first_name
+= show_field 'Last Name', @author.last_name
+= show_field 'Date Of Birth', @author.decorate.formatted_date
+= show_field 'Date Of Death', @author.decorate.formatted_date('death')
+
+= link_to 'Edit', edit_author_path(@author), class:"btn btn-primary"
+= link_to 'Back', authors_path, class:"btn btn-primary"

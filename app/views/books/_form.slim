@@ -1,0 +1,12 @@
+= form_with(model: book) do |form|
+
+  = render 'errors', book: @book
+
+  = form_field form, :title, (form.text_field :title)
+  = form_field form, :author, (form.select :author_id, @authors.map {|a| [a.full_name, a.id]})
+  = form_field form, :genre, (form.select :genre_ids, @genres.map {|g| [g.name, g.id]}, {}, {multiple: true})
+  = form_field form, :year, (form.text_field :year)
+  = form_field form, :quantity, (form.text_field :quantity)
+
+  .actions
+    = form.submit class:"btn btn-primary"

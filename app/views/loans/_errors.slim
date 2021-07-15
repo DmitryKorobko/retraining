@@ -1,0 +1,10 @@
+- if loan.errors.any?
+  #error_explanation
+
+  h2
+    = pluralize(loan.errors.count, "error")
+    |  prohibited this loan from being saved:
+  ul
+    - loan.errors.each do |error|
+      li
+        = error.full_message

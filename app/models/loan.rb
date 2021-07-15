@@ -1,4 +1,6 @@
+# frozen_string_literal: true
+
 class Loan < ApplicationRecord
-  has_one :user
-  has_one :book
+  belongs_to :user
+  belongs_to :book
 end

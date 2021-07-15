@@ -1,0 +1,11 @@
+p#notice
+  = notice
+h1
+  = "Loan #{@loan.id}"
+
+= show_field 'Book', @loan.book.title
+= show_field 'Customer', @loan.user.full_name
+= show_field 'Period', @loan.decorate.formatted_period
+
+= link_to 'Edit', edit_loan_path(@loan), class:"btn btn-primary"
+= link_to 'Back', loans_path, class:"btn btn-primary"

@@ -1,0 +1,13 @@
+p#notice
+  = notice
+h1
+  = @book.title
+
+= show_field 'Title', @book.title
+= show_field 'Author', @book.author.full_name
+= show_field 'Genre', @book.genres.map {|bg| bg.name}.join(', ')
+= show_field 'Year', @book.year
+= show_field 'Quantity', @book.quantity
+
+= link_to 'Edit', edit_book_path(@book), class:"btn btn-primary"
+= link_to 'Back', books_path, class:"btn btn-primary"

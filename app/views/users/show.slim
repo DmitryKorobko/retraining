@@ -1,0 +1,12 @@
+p#notice
+  = notice
+h1
+  = @user.full_name
+
+= show_field 'First Name', @user.first_name
+= show_field 'Last Name', @user.last_name
+= show_field 'Email', @user.email
+= show_field 'Encrypted Password', @user.encrypted_password
+
+= link_to 'Edit', edit_user_path(@user), class:"btn btn-primary"
+= link_to 'Back', users_path, class:"btn btn-primary"

@@ -1,0 +1,11 @@
+= form_for user, url: url do |form|
+
+  = render 'errors', user: @user
+
+  = form_field form, :first_name, (form.text_field :first_name)
+  = form_field form, :last_name, (form.text_field :last_name)
+  = form_field form, :email, (form.email_field :email)
+  = form_field form, :password, (form.password_field :password)
+
+  .actions
+    = form.submit class:"btn btn-primary"
