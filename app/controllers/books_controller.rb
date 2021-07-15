@@ -10,9 +10,9 @@ class BooksController < ApplicationController
   # GET /books or /books.json
   def index
     if user_signed_in? && current_user.librarian?
-      books = Book.includes(:author, :genres)
+      books = Book.includes(:author, :genres).distinct
     else
-      books = Book.joins(:author, :genres)
+      books = Book.joins(:author, :genres).distinct
     end
 
     if params[:filter_author].present?

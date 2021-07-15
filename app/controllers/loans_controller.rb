@@ -9,9 +9,9 @@ class LoansController < ApplicationController
   # GET /loans or /loans.json
   def index
     if current_user.librarian?
-      @loans = Loan.includes(:book, :user)
+      @loans = Loan.includes(:book, :user).distinct
     else
-      @loans = Loan.includes(:book, :user).where(user_id: current_user.id)
+      @loans = Loan.includes(:book, :user).where(user_id: current_user.id).distinct
     end
   end
 
