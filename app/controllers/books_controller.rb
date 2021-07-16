@@ -15,17 +15,7 @@ class BooksController < ApplicationController
       books = Book.available_now.joins(:author, :genres).distinct
     end
 
-    if params[:filter_author].present?
-      author = params[:filter_author].downcase
-      books = books.where("lower(authors.first_name) LIKE '%#{author}%' OR lower(authors.last_name) LIKE '%#{author}%'")
-    end
-
-    if params[:filter_title].present?
-      title = params[:filter_title].downcase
-      books = books.where("lower(title) LIKE '%#{title}%'")
-    end
-
-    @books = books.page(params[:page])
+    @books = books.filter_author(params[:filter_author]).filter_title(params[:filter_title]).page(params[:page])
   end
 
   # GET /books/1 or /books/1.json
