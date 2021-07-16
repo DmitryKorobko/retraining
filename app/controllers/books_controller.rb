@@ -10,9 +10,9 @@ class BooksController < ApplicationController
   # GET /books or /books.json
   def index
     if user_signed_in? && current_user.librarian?
-      books = Book.includes(:author, :genres).distinct
-    else
       books = Book.joins(:author, :genres).distinct
+    else
+      books = Book.available_now.joins(:author, :genres).distinct
     end
 
     if params[:filter_author].present?
@@ -26,11 +26,6 @@ class BooksController < ApplicationController
     end
 
     @books = books.page(params[:page])
-
-    # respond_to do |format|
-    #   format.html { redirect_to books_path, notice: 'Filters applied.' }
-    #   format.json { render :index, status: :accepted, location: books_path }
-    # end
   end
 
   # GET /books/1 or /books/1.json

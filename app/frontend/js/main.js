@@ -16,10 +16,6 @@ $(document).ready(function(){
             period = ([year, month, day].join('-')),
             url = '/loans';
 
-        console.log('Check Book: ' + book_id);
-        console.log('Check User: ' + user_id);
-        console.log('Check Period: ' + period);
-
         $.ajax({
             type: "POST",
             url: url,
@@ -29,8 +25,20 @@ $(document).ready(function(){
                 'loan[period]': period,
                 'commit': 'Create Loan'
             },
-            success: function (){
-                console.log('Success!')
+            success: function (data){
+                console.log(data)
+                let book = data.loan.book,
+                    user = data.loan.user,
+                    period = new Date(data.loan.period);
+
+                if (book.quantity > 0) {
+                    $('#loan_book_id option[value='+ book.id +']').text(book.title + ' (' + book.quantity + ' available now)');
+                    $('#loan_book_id').val(book.id);
+                    $('#loan_user_id').val(user.id);
+                    $('#loan_period').val('');
+                } else if (book.quantity <= 0) {
+                    $('#loan_book_id option[value='+ book.id +']').remove();
+                }
             },
             dataType: 'json'
         });
