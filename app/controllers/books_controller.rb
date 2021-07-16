@@ -9,13 +9,9 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    if user_signed_in? && current_user.librarian?
-      books = Book.joins(:author, :genres).distinct
-    else
-      books = Book.available_now.joins(:author, :genres).distinct
-    end
-
-    @books = books.filter_author(params[:filter_author]).filter_title(params[:filter_title]).page(params[:page])
+    @books = Book.joins(:author, :genres).distinct
+    @books = @books.available_now if !user_signed_in? || current_user.librarian?
+    @books = @books.filter_author(params[:filter_author]).filter_title(params[:filter_title]).page(params[:page])
   end
 
   # GET /books/1 or /books/1.json
