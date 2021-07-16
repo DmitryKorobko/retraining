@@ -77,7 +77,7 @@ class LoansController < ApplicationController
   end
 
   def set_books_and_customers
-    @books = Book.all
+    @books = Book.available_now
     @customers = Customer.all
   end
 
