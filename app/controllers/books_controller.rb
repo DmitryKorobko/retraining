@@ -25,7 +25,7 @@ class BooksController < ApplicationController
       books = books.where("lower(title) LIKE '%#{title}%'")
     end
 
-    @books = books
+    @books = books.page(params[:page])
 
     # respond_to do |format|
     #   format.html { redirect_to books_path, notice: 'Filters applied.' }

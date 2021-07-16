@@ -309,6 +309,7 @@ DEPENDENCIES
   font-awesome-rails
   jbuilder (~> 2.7)
   jquery-rails
+  kaminari
   listen (~> 3.3)
   pg (~> 1.1)
   pry

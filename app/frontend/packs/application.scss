@@ -24,3 +24,12 @@ th.actions {
 .not-expired {
   color: green;
 }
+
+nav.pagination {
+  width: 100%;
+  text-align: center;
+}
+
+.pagination span {
+  padding-right: 15px;
+}
