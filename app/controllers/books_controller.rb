@@ -20,14 +20,7 @@ class BooksController < ApplicationController
 
   # GET /books/1 or /books/1.json
   def show
-    customers = []
-    loans = Loan.includes(:user).where(book_id: @book.id)
-
-    loans.each do |l|
-      customers << (helpers.link_to l.user.full_name, user_path(l.user)).html_safe
-    end
-
-    @customers = customers.join(', ')
+    @loans = Loan.includes(:user).where(book_id: @book.id)
   end
 
   # GET /books/new

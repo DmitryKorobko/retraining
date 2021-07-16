@@ -8,7 +8,9 @@ h1
 = show_field 'Email', @user.email
 = show_field 'Encrypted Password', @user.encrypted_password
 - if user_signed_in? && current_user.librarian?
-  = show_field 'Books', sanitize(@books)
+  - books = []
+  - @loans.each {|l| books << (link_to "#{l.book.title}", book_path(l.book))  }
+  = show_field 'Books', sanitize(books.join(', '))
 
 = link_to 'Edit', edit_user_path(@user), class:"btn btn-primary"
 = link_to 'Back', users_path, class:"btn btn-primary"

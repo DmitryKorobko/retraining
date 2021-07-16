@@ -9,7 +9,9 @@ h1
 = show_field 'Year', @book.year
 = show_field 'Quantity', @book.quantity
 - if user_signed_in? && current_user.librarian?
-  = show_field 'Customers', sanitize(@customers)
+  - users = []
+  - @loans.each {|l| users << (link_to "#{l.user.full_name}", user_path(l.user))  }
+  = show_field 'Customers', sanitize(users.join(', '))
 
 = link_to 'Edit', edit_book_path(@book), class:"btn btn-primary"
 = link_to 'Back', books_path, class:"btn btn-primary"
